@@ -1,0 +1,16 @@
+{
+    "name": "dev",
+    "dockerFile": "Dockerfile",
+    "postCreateCommand": "/bin/sh ./.devcontainer/commands.sh",
+    "remoteUser": "dev",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance"
+            ],
+            "settings": {
+            }
+        }
+    }
+}
