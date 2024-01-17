@@ -7,6 +7,7 @@ def main():
     repository_url = 'https://raw.githubusercontent.com/konramusaurus/voices/main/'
 
     data = dict()
+    formed_data = dict()
 
     for voice in sorted(dir_assets.glob('**/*.mp3')):
         voice_path = str(voice).replace('/workspaces/voices/', '')
@@ -20,6 +21,7 @@ def main():
 
         if title not in data:
             data[title] = {
+                "title": title,
                 "publish_date": voice_dir_tokens[0],
                 "video_url": f'https://www.youtube.com/watch?v={voice_dir_tokens[-1]}',
                 "voices": [],
@@ -34,9 +36,10 @@ def main():
                 "tags": voice_slug_and_tags.replace('[', '').split(']')[0].split(','),
             }
         )
-
+    
+    formed_data = [value for _, value in data.items()]
     with Path(dir_assets.parent / Path('index.json')).open('w') as f:
-        json.dump(data, f, indent=2)
+        json.dump(formed_data, f, indent=2)
 
 
 if __name__ == '__main__':
